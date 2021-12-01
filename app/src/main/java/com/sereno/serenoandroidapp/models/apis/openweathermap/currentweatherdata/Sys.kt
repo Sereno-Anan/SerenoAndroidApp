@@ -1,4 +1,4 @@
-package com.sereno.serenoandroidapp
+package com.sereno.serenoandroidapp.models.apis.openweathermap.currentweatherdata
 
 data class Sys(
     val country: String,
