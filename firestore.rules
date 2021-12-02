@@ -1,0 +1,10 @@
+service cloud.firestore {
+    match /databases/{database}/documents {
+        // Anyone can read a raindrops, only authorized
+        // users can create or update. Deletes are not allowed.
+        match /raindrops/{rainId} {
+            allow read: if true;
+            allow create, update: if request.auth.uid != null;
+        }
+    }
+}

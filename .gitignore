@@ -18,8 +18,10 @@ local.properties
 *.apk
 *.aar
 *.zip
+*.log
 google-services.json
 .project
 .settings
 .classpath
 .vscode
+.firebaserc
