@@ -16,6 +16,9 @@
             android:name=".activities.PlayGifActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.WeatherInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
