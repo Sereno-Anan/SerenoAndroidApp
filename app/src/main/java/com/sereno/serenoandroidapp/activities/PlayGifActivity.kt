@@ -8,6 +8,6 @@ class PlayGifActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_play_gif)
-        setTitle(R.string.move_test)
+        setTitle(R.string.play_gif_name)
     }
 }

@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val moveBtn = findViewById<Button>(R.id.moveBtn)
+        val moveBtn = findViewById<Button>(R.id.movePlayGifButton)
 
         moveBtn.setOnClickListener {
             val intent = Intent(this, PlayGifActivity::class.java)
