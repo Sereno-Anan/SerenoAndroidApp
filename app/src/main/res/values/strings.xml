@@ -2,5 +2,7 @@
     <string name="app_name">SerenoAndroidApp</string>
     <string name="play_gif_name">PlayGif</string>
     <string name="play_gif_move">MOVE TO PLAY GIF</string>
+    <string name="firebase_test_name">FirebaseTest</string>
+    <string name="firebase_test_move">MOVE TO FIREBASE TEST</string>
     <string name="move_weather">MOVE WEATHER</string>
 </resources>
