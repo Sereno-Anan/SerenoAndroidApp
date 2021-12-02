@@ -8,5 +8,7 @@ class WeatherInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
+
+        setTitle("Weather")
     }
 }
