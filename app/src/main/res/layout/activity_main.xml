@@ -20,6 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/play_gif_move" />
+
+        <Button
+            android:id="@+id/moveFirebaseTestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/firebase_test_move" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
