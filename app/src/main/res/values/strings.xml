@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SerenoAndroidApp</string>
+    <string name="move_test">PlayGif</string>
+    <string name="move_btn">MOVE</string>
 </resources>
