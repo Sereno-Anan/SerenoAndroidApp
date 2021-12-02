@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SerenoAndroidApp">
         <activity
+            android:name=".activities.FirebaseTestActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.PlayGifActivity"
             android:exported="false" />
         <activity
