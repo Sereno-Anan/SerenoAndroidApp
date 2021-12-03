@@ -9,6 +9,6 @@ class WeatherInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
 
-        setTitle("Weather")
+        setTitle(R.string.weather_info_name)
     }
 }

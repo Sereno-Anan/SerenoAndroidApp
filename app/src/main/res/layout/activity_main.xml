@@ -29,10 +29,10 @@
             android:text="@string/firebase_test_move" />
 
         <Button
-            android:id="@+id/moveWeather"
+            android:id="@+id/moveWeatherInfoButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/move_weather" />
+            android:text="@string/weather_info_move" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

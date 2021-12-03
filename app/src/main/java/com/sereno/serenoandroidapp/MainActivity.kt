@@ -14,20 +14,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val movePlayGifButton = findViewById<Button>(R.id.movePlayGifButton)
-        val moveFirebaseTest = findViewById<Button>(R.id.moveFirebaseTestButton)
-        val moveWeather = findViewById<Button>(R.id.moveWeather)
+        val moveFirebaseTestButton = findViewById<Button>(R.id.moveFirebaseTestButton)
+        val moveWeatherInfoButton = findViewById<Button>(R.id.moveWeatherInfoButton)
 
         movePlayGifButton.setOnClickListener {
             val intent = Intent(this, PlayGifActivity::class.java)
             startActivity(intent)
         }
 
-        moveFirebaseTest.setOnClickListener {
+        moveFirebaseTestButton.setOnClickListener {
             val intent = Intent(this, FirebaseTestActivity::class.java)
             startActivity(intent)
         }
 
-        moveWeather.setOnClickListener {
+        moveWeatherInfoButton.setOnClickListener {
             val intent = Intent(this, WeatherInfoActivity::class.java)
             startActivity(intent)
         }

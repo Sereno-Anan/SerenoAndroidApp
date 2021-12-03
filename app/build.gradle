@@ -63,7 +63,13 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     // Firebase
-    implementation platform('com.google.firebase:firebase-bom:29.0.1')
-    implementation 'com.google.firebase:firebase-firestore:24.0.0'
-    implementation 'com.google.firebase:firebase-analytics-ktx:20.0.0'
+    def firebase_bom_version = '29.0.1'
+    implementation platform("com.google.firebase:firebase-bom:$firebase_bom_version")
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    // Firebase UI
+    def firebase_ui_auth_version = '8.0.0'
+    implementation "com.firebaseui:firebase-ui-auth:$firebase_ui_auth_version"
 }
