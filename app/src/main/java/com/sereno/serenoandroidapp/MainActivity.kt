@@ -12,15 +12,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val moveBtn = findViewById<Button>(R.id.movePlayGifButton)
-        val moveFirebaseTest = findViewById<Button>(R.id.moveFirebaseTestButton)
+        val movePlayGifButton = findViewById<Button>(R.id.movePlayGifButton)
+        val moveFirebaseTestButton = findViewById<Button>(R.id.moveFirebaseTestButton)
 
-        moveBtn.setOnClickListener {
+        movePlayGifButton.setOnClickListener {
             val intent = Intent(this, PlayGifActivity::class.java)
             startActivity(intent)
         }
 
-        moveFirebaseTest.setOnClickListener {
+        moveFirebaseTestButton.setOnClickListener {
             val intent = Intent(this, FirebaseTestActivity::class.java)
             startActivity(intent)
         }
