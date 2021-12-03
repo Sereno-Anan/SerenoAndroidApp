@@ -1,6 +1,6 @@
 package com.sereno.serenoandroidapp.models.apis.openweathermap.currentweatherdata
 
-data class WeatherData(
+data class CurrentWeatherResponce(
     val base: String,
     val clouds: Clouds,
     val cod: Int,
