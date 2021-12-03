@@ -5,4 +5,6 @@
     <string name="firebase_test_name">FirebaseTest</string>
     <string name="firebase_test_move">MOVE TO FIREBASE TEST</string>
     <string name="rain_gif_content_description">Gif of rain</string>
+    <string name="weather_info_name">WeatherInfo</string>
+    <string name="weather_info_move">MOVE WEATHER</string>
 </resources>
