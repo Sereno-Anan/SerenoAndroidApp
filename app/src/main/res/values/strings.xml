@@ -4,6 +4,6 @@
     <string name="play_gif_move">MOVE TO PLAY GIF</string>
     <string name="firebase_test_name">FirebaseTest</string>
     <string name="firebase_test_move">MOVE TO FIREBASE TEST</string>
-    <string name="weather_info_move">MOVE WEATHER</string>
     <string name="weather_info_name">WeatherInfo</string>
+    <string name="weather_info_move">MOVE WEATHER</string>
 </resources>
