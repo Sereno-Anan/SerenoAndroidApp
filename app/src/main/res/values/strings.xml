@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">SerenoAndroidApp</string>
+    <string name="add">ADD</string>
     <string name="play_gif_name">PlayGif</string>
     <string name="play_gif_move">MOVE TO PLAY GIF</string>
     <string name="firebase_test_name">FirebaseTest</string>
