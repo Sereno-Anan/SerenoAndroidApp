@@ -1,6 +1,6 @@
 package com.sereno.serenoandroidapp.services
 
-import com.sereno.serenoandroidapp.models.apis.openweathermap.currentweatherdata.WeatherData
+import com.sereno.serenoandroidapp.models.apis.openweathermap.currentweatherdata.CurrentWeatherResponce
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,6 +10,7 @@ interface OpenWeatherMapService {
     fun fetchWeather(
         @Query("q") cityName: String,
         @Query("appid") apiKey: String,
-        @Query("units") units: String
-    ): Call<WeatherData>
+        @Query("units") units: String,
+        @Query("lang") lang: String
+    ): Call<CurrentWeatherResponce>
 }
