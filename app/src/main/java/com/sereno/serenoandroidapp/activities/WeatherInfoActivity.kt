@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.sereno.serenoandroidapp.BuildConfig
 import com.sereno.serenoandroidapp.R
@@ -18,11 +19,12 @@ class WeatherInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
+        val getWeatherButton = findViewById<Button>(R.id.get)
 
         setTitle(R.string.weather_info_name)
-
-
-        getCurrentWeather()
+        getWeatherButton.setOnClickListener {
+            getCurrentWeather()
+        }
     }
 
     private fun getCurrentWeather() {
