@@ -41,7 +41,7 @@ class WeatherInfoActivity : AppCompatActivity() {
             try {
                 val service: OpenWeatherMapService =
                     retrofit.create(OpenWeatherMapService::class.java)
-                val WeatherApiResponse = service.fetchWeather(
+                val WeatherApiResponse = service.getCurrentWeatherData(
                     "anan", BuildConfig.OWM_API_KEY, "metric", "ja"
                 ).execute().body()
                     ?: throw IllegalStateException("bodyがnull")
