@@ -10,7 +10,7 @@ interface OpenWeatherMapService {
     fun getCurrentWeatherData(
         @Query("q") cityName: String,
         @Query("appid") apiKey: String,
-        @Query("units") units: String,
-        @Query("lang") lang: String
+        @Query("units") units: String?,
+        @Query("lang") lang: String?
     ): Call<CurrentWeatherResponse>
 }
