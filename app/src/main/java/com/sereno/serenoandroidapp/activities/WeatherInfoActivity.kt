@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.sereno.serenoandroidapp.BuildConfig
 import com.sereno.serenoandroidapp.R
@@ -37,14 +38,19 @@ class WeatherInfoActivity : AppCompatActivity() {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
+        val cityNameView = findViewById<EditText>(R.id.inputCityName)
+        val cityNameText = cityNameView.text.toString()
+
         thread {
             try {
                 val service: OpenWeatherMapService =
                     retrofit.create(OpenWeatherMapService::class.java)
                 val weatherApiResponse = service.getCurrentWeatherData(
-                    "anan", BuildConfig.OWM_API_KEY, "metric", "ja"
+                    cityNameText, BuildConfig.OWM_API_KEY, "metric", "ja"
                 ).execute().body()
                     ?: throw IllegalStateException("bodyがnull")
+
+                Log.d("city-name", cityNameText)
 
                 Handler(Looper.getMainLooper()).post {
                     Log.d("response-weather", weatherApiResponse.weather.toString())
