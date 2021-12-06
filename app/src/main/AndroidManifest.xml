@@ -12,6 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SerenoAndroidApp">
+        <receiver
+            android:name=".views.widgets.SerenoWeatherWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/sereno_weather_widget_info" />
+        </receiver>
+
         <activity
             android:name=".activities.FirebaseTestActivity"
             android:exported="false" />
