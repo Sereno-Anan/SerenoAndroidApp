@@ -12,4 +12,8 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="appwidget_temperature_text">温度: ——.—— ℃</string>
+    <string name="appwidget_temp_update_text">Temp Update: YYYY/MM/DD hh:mm:ss</string>
+    <string name="appwidget_device_update_text">Device Update: YYYY/MM/DD hh:mm:ss</string>
+    <string name="appwidget_by_OpenWeatherMap_text">by OpenWeatherMap</string>
 </resources>
