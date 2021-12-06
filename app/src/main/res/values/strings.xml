@@ -9,5 +9,5 @@
     <string name="rain_gif_content_description">Gif of rain</string>
     <string name="weather_info_name">WeatherInfo</string>
     <string name="weather_info_move">MOVE WEATHER INFO</string>
-    <string name="input_city_name_text">City Name</string>
+    <string name="weather_info_hint_city_name">City Name</string>
 </resources>

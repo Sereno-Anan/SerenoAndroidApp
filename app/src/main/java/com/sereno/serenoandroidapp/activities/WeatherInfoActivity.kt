@@ -21,7 +21,7 @@ class WeatherInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
-        val getWeatherButton = findViewById<Button>(R.id.get)
+        val getWeatherButton = findViewById<Button>(R.id.getCurrentWeatherButton)
 
         setTitle(R.string.weather_info_name)
         getWeatherButton.setOnClickListener {
@@ -39,19 +39,19 @@ class WeatherInfoActivity : AppCompatActivity() {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
-        val cityNameView = findViewById<EditText>(R.id.inputCityName)
-        val cityNameText = cityNameView.text.toString()
+        val inputCityNameText = findViewById<EditText>(R.id.inputCityNameText)
+        val cityName = inputCityNameText.text.toString()
 
         thread {
             try {
                 val service: OpenWeatherMapService =
                     retrofit.create(OpenWeatherMapService::class.java)
                 val weatherApiResponse = service.getCurrentWeatherData(
-                    cityNameText, BuildConfig.OWM_API_KEY, "metric", "ja"
+                    cityName, BuildConfig.OWM_API_KEY, "metric", "ja"
                 ).execute().body()
-                    ?: throw IllegalStateException()
+                    ?: throw IllegalStateException("body is null")
 
-                Log.d("city-name", cityNameText)
+                Log.d("city-name", cityName)
 
                 Handler(Looper.getMainLooper()).post {
                     Log.d("response-weather", weatherApiResponse.weather.toString())
