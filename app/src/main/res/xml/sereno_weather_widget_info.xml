@@ -3,7 +3,7 @@
     android:description="@string/app_widget_description"
     android:initialKeyguardLayout="@layout/widget_sereno_weather"
     android:initialLayout="@layout/widget_sereno_weather"
-    android:minWidth="180dp"
+    android:minWidth="190dp"
     android:minHeight="110dp"
     android:previewImage="@drawable/example_appwidget_preview"
     android:previewLayout="@layout/widget_sereno_weather"
