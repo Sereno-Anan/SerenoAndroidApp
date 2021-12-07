@@ -13,4 +13,10 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
+    <string name="app_widget_temp_text">--.--</string>
+    <string name="app_widget_celsius_text">℃</string>
+    <string name="app_widget_temp_update_text">Temp Update:</string>
+    <string name="app_widget_device_update_text">Device Update:</string>
+    <string name="app_widget_update_date_text">YYYY/MM/DD hh:mm</string>
+    <string name="app_widget_by_OpenWeatherMap_text">by Open Weather Map</string>
 </resources>
