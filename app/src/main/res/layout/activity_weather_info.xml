@@ -30,7 +30,6 @@
             android:id="@+id/getCurrentWeatherButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:text="@string/get"
             android:textSize="14sp" />
 
