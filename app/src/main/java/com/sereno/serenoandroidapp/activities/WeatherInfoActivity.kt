@@ -5,6 +5,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sereno.serenoandroidapp.BuildConfig
 import com.sereno.serenoandroidapp.R
@@ -19,7 +21,7 @@ class WeatherInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
-        val getWeatherButton = findViewById<Button>(R.id.get)
+        val getWeatherButton = findViewById<Button>(R.id.getCurrentWeatherButton)
 
         setTitle(R.string.weather_info_name)
         getWeatherButton.setOnClickListener {
@@ -37,20 +39,30 @@ class WeatherInfoActivity : AppCompatActivity() {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
+        val inputCityNameText = findViewById<EditText>(R.id.inputCityNameText)
+        val cityName = inputCityNameText.text.toString()
+
         thread {
             try {
                 val service: OpenWeatherMapService =
                     retrofit.create(OpenWeatherMapService::class.java)
                 val weatherApiResponse = service.getCurrentWeatherData(
-                    "anan", BuildConfig.OWM_API_KEY, "metric", "ja"
+                    cityName, BuildConfig.OWM_API_KEY, "metric", "ja"
                 ).execute().body()
-                    ?: throw IllegalStateException("bodyがnull")
+                    ?: throw IllegalStateException("body is null")
+
+                Log.d("city-name", cityName)
 
                 Handler(Looper.getMainLooper()).post {
                     Log.d("response-weather", weatherApiResponse.weather.toString())
                 }
             } catch (e: Exception) {
-                Log.d("response-weather", "debug $e")
+                Handler(Looper.getMainLooper()).post {
+                    val toast =
+                        Toast.makeText(this, "This city name is not found", Toast.LENGTH_SHORT)
+                    toast.show()
+                }
+                Log.d("response-error", "debug $e")
             }
         }
     }
