@@ -1,6 +1,5 @@
 package com.sereno.serenoandroidapp.activities
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,7 +17,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class FirebaseTestActivity : AppCompatActivity() {
-    @SuppressLint("SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_firebase_test)
@@ -51,7 +49,7 @@ class FirebaseTestActivity : AppCompatActivity() {
         getFirebaseDataButton.setOnClickListener {
             rtdb.child("raindrops/").get().addOnSuccessListener {
                 val date = Date(it.child("timestamp").value as Long)
-                val formattedDate = SimpleDateFormat("yyyy/MM/dd hh:mm")
+                val formattedDate = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.JAPANESE)
                 raindropsDateText.text = formattedDate.format(date)
                 raindropsStatusText.text = it.child("status").value.toString()
             }.addOnFailureListener {
