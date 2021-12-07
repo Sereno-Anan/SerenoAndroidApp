@@ -9,7 +9,6 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,11 +29,11 @@
 
         <Button
             android:id="@+id/getCurrentWeatherButton"
-            android:layout_width="125dp"
-            android:layout_height="59dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/get"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
