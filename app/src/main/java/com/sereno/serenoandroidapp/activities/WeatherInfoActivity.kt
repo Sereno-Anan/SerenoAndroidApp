@@ -4,10 +4,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.sereno.serenoandroidapp.BuildConfig
 import com.sereno.serenoandroidapp.R
 import com.sereno.serenoandroidapp.services.OpenWeatherMapService
@@ -40,6 +39,8 @@ class WeatherInfoActivity : AppCompatActivity() {
             .build()
 
         val inputCityNameText = findViewById<EditText>(R.id.inputCityNameText)
+        val currentWeatherIcon = findViewById<ImageView>(R.id.outputWeatherIcon)
+        val currrentWeatherText = findViewById<TextView>(R.id.outputWeatherText)
         val cityName = inputCityNameText.text.toString()
 
         thread {
@@ -55,6 +56,11 @@ class WeatherInfoActivity : AppCompatActivity() {
 
                 Handler(Looper.getMainLooper()).post {
                     Log.d("response-weather", weatherApiResponse.weather.toString())
+                    val weatherIconUrl = weatherApiResponse.weather[0].icon
+                    currrentWeatherText.text = weatherApiResponse.main.temp.toString()
+                    Glide.with(this)
+                        .load("https://openweathermap.org/img/wn/$weatherIconUrl@2x.png")
+                        .into(currentWeatherIcon)
                 }
             } catch (e: Exception) {
                 Handler(Looper.getMainLooper()).post {
