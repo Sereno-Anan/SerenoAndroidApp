@@ -6,13 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".activities.FirebaseTestActivity">
 
-    <Button
-        android:id="@+id/addFirebaseDataButton"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/raindropsDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/update_date_text"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/raindropsStatusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/firebase_test_status"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/getFirebaseDataButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/get" />
+
+        <Button
+            android:id="@+id/addFirebaseDataButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
