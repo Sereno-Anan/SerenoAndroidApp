@@ -40,7 +40,7 @@ class WeatherInfoActivity : AppCompatActivity() {
 
         val inputCityNameText = findViewById<EditText>(R.id.inputCityNameText)
         val currentWeatherIcon = findViewById<ImageView>(R.id.outputWeatherIcon)
-        val currrentWeatherText = findViewById<TextView>(R.id.outputWeatherText)
+        val currentWeatherText = findViewById<TextView>(R.id.outputWeatherText)
         val cityName = inputCityNameText.text.toString()
 
         thread {
@@ -57,7 +57,7 @@ class WeatherInfoActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).post {
                     Log.d("response-weather", weatherApiResponse.weather.toString())
                     val weatherIconUrl = weatherApiResponse.weather[0].icon
-                    currrentWeatherText.text = weatherApiResponse.main.temp.toString()
+                    currentWeatherText.text = weatherApiResponse.main.temp.toString()
                     Glide.with(this)
                         .load("https://openweathermap.org/img/wn/$weatherIconUrl@2x.png")
                         .into(currentWeatherIcon)
