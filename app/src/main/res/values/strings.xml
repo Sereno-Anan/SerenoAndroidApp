@@ -2,6 +2,7 @@
     <string name="app_name">SerenoAndroidApp</string>
     <string name="add">ADD</string>
     <string name="get">GET</string>
+    <string name="celsius_text">℃</string>
     <string name="play_gif_name">PlayGif</string>
     <string name="play_gif_move">MOVE TO PLAY GIF</string>
     <string name="firebase_test_name">FirebaseTest</string>
@@ -10,11 +11,11 @@
     <string name="weather_info_name">WeatherInfo</string>
     <string name="weather_info_move">MOVE WEATHER INFO</string>
     <string name="weather_info_hint_city_name">City Name</string>
+    <string name="weather_info_image_description">Weather Icon</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
     <string name="app_widget_temp_text">--.--</string>
-    <string name="app_widget_celsius_text">℃</string>
     <string name="app_widget_temp_update_text">Temp Update:</string>
     <string name="app_widget_device_update_text">Device Update:</string>
     <string name="app_widget_update_date_text">YYYY/MM/DD hh:mm</string>
