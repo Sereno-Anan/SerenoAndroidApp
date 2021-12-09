@@ -25,7 +25,7 @@ class WeatherInfoActivity : AppCompatActivity() {
         val pref = getSharedPreferences("my_settings", Context.MODE_PRIVATE)
 
         setTitle(R.string.weather_info_name)
-        if (pref.getString("keepCityName", "")!!.isEmpty()) {
+        if (pref.getString("keepCityName", "")!!.isNotEmpty()) {
             getCurrentWeather()
         }
         getWeatherButton.setOnClickListener {
