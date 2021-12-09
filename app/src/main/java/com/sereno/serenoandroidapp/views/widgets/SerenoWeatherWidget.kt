@@ -3,12 +3,13 @@ package com.sereno.serenoandroidapp.views.widgets
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
 import android.util.Log
 import android.widget.RemoteViews
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.sereno.serenoandroidapp.R
-import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -53,9 +54,9 @@ internal fun updateAppWidget(
             val weatherStatus = it.child("status").value
 
             if (weatherStatus == true) {
-                views.setInt(R.id.widgetBackground, "setBackgroundResource",R.drawable.image_rain)
+                views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.background_style_rain)
             } else {
-                views.setInt(R.id.widgetBackground, "setBackgroundResource",R.drawable.image_sunny)
+                views.setInt(R.id.widgetBackground, "setBackgroundResource", R.drawable.background_style_sunny)
             }
 
             appWidgetManager.updateAppWidget(appWidgetId, views)
