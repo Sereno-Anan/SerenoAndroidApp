@@ -1,5 +1,6 @@
 package com.sereno.serenoandroidapp.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -21,8 +22,12 @@ class WeatherInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
         val getWeatherButton = findViewById<Button>(R.id.getCurrentWeatherButton)
+        val pref = getSharedPreferences("my_settings", Context.MODE_PRIVATE)
 
         setTitle(R.string.weather_info_name)
+        if (pref.getString("keepCityName", "")!!.isEmpty()) {
+            getCurrentWeather()
+        }
         getWeatherButton.setOnClickListener {
             getCurrentWeather()
         }
@@ -41,7 +46,13 @@ class WeatherInfoActivity : AppCompatActivity() {
         val inputCityNameText = findViewById<EditText>(R.id.inputCityNameText)
         val currentWeatherIcon = findViewById<ImageView>(R.id.outputWeatherIcon)
         val currentWeatherText = findViewById<TextView>(R.id.outputWeatherText)
-        val cityName = inputCityNameText.text.toString()
+        val pref = getSharedPreferences("CityNameData", Context.MODE_PRIVATE)
+        val cityName = if (inputCityNameText.text.toString() != "") {
+            inputCityNameText.text.toString()
+        } else {
+            pref.getString("keepCityName", "").toString()
+        }
+
 
         thread {
             try {
@@ -57,10 +68,15 @@ class WeatherInfoActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).post {
                     Log.d("response-weather", weatherApiResponse.weather.toString())
                     val weatherIconUrl = weatherApiResponse.weather[0].icon
-                    currentWeatherText.text = weatherApiResponse.main.temp.toString()
+                    val currentTemp = weatherApiResponse.main.temp.toString()
+                    currentWeatherText.text = currentTemp
                     Glide.with(this)
                         .load("https://openweathermap.org/img/wn/$weatherIconUrl@2x.png")
                         .into(currentWeatherIcon)
+                    getSharedPreferences("CityNameData", Context.MODE_PRIVATE).edit().apply {
+                        putString("keepCityName", cityName)
+                        apply()
+                    }
                 }
             } catch (e: Exception) {
                 Handler(Looper.getMainLooper()).post {
