@@ -22,7 +22,7 @@ class WeatherInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
         val getWeatherButton = findViewById<Button>(R.id.getCurrentWeatherButton)
-        val pref = getSharedPreferences("CityNameData", Context.MODE_PRIVATE)
+        val pref = getSharedPreferences("CityName_Data", Context.MODE_PRIVATE)
 
         setTitle(R.string.weather_info_name)
         if (pref.getString("keepCityName", "")!!.isNotEmpty()) {
