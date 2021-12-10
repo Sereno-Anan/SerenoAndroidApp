@@ -22,10 +22,10 @@ class WeatherInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
         val getWeatherButton = findViewById<Button>(R.id.getCurrentWeatherButton)
-        val pref = getSharedPreferences("CityNameData", Context.MODE_PRIVATE)
+        val pref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 
         setTitle(R.string.weather_info_name)
-        if (pref.getString("keepCityName", "")!!.isNotEmpty()) {
+        if (pref.getString("cityName", "")!!.isNotEmpty()) {
             getCurrentWeather()
         }
         getWeatherButton.setOnClickListener {
@@ -46,11 +46,12 @@ class WeatherInfoActivity : AppCompatActivity() {
         val inputCityNameText = findViewById<EditText>(R.id.inputCityNameText)
         val currentWeatherIcon = findViewById<ImageView>(R.id.outputWeatherIcon)
         val currentWeatherText = findViewById<TextView>(R.id.outputWeatherText)
-        val pref = getSharedPreferences("CityNameData", Context.MODE_PRIVATE)
+        val currentCityNameText = findViewById<TextView>(R.id.currentCityName)
+        val pref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
         val cityName = if (inputCityNameText.text.toString() != "") {
             inputCityNameText.text.toString()
         } else {
-            pref.getString("keepCityName", "").toString()
+            pref.getString("cityName", "").toString()
         }
 
 
@@ -73,10 +74,11 @@ class WeatherInfoActivity : AppCompatActivity() {
                     Glide.with(this)
                         .load("https://openweathermap.org/img/wn/$weatherIconUrl@2x.png")
                         .into(currentWeatherIcon)
-                    getSharedPreferences("CityNameData", Context.MODE_PRIVATE).edit().apply {
-                        putString("keepCityName", cityName)
+                    getSharedPreferences("AppSettings", Context.MODE_PRIVATE).edit().apply {
+                        putString("cityName", cityName)
                         apply()
                     }
+                    currentCityNameText.text = pref.getString("cityName", "")
                 }
             } catch (e: Exception) {
                 Handler(Looper.getMainLooper()).post {
