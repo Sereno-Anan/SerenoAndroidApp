@@ -13,7 +13,6 @@
     <string name="weather_info_name">WeatherInfo</string>
     <string name="weather_info_move">MOVE WEATHER INFO</string>
     <string name="weather_info_hint_city_name">City Name</string>
-    <string name="weather_info_current_city_name">CurrentCityName</string>
     <string name="weather_info_image_description">Weather Icon</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
