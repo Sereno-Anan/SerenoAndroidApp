@@ -1,5 +1,6 @@
 package com.sereno.serenoandroidapp.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -21,8 +22,12 @@ class WeatherInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
         val getWeatherButton = findViewById<Button>(R.id.getCurrentWeatherButton)
+        val pref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 
         setTitle(R.string.weather_info_name)
+        if (pref.getString("cityName", "")!!.isNotEmpty()) {
+            getCurrentWeather()
+        }
         getWeatherButton.setOnClickListener {
             getCurrentWeather()
         }
@@ -40,8 +45,15 @@ class WeatherInfoActivity : AppCompatActivity() {
 
         val inputCityNameText = findViewById<EditText>(R.id.inputCityNameText)
         val currentWeatherIcon = findViewById<ImageView>(R.id.outputWeatherIcon)
-        val currrentWeatherText = findViewById<TextView>(R.id.outputWeatherText)
-        val cityName = inputCityNameText.text.toString()
+        val currentWeatherText = findViewById<TextView>(R.id.outputWeatherText)
+        val currentCityNameText = findViewById<TextView>(R.id.currentCityName)
+        val pref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
+        val cityName = if (inputCityNameText.text.toString() != "") {
+            inputCityNameText.text.toString()
+        } else {
+            pref.getString("cityName", "").toString()
+        }
+
 
         thread {
             try {
@@ -57,10 +69,16 @@ class WeatherInfoActivity : AppCompatActivity() {
                 Handler(Looper.getMainLooper()).post {
                     Log.d("response-weather", weatherApiResponse.weather.toString())
                     val weatherIconUrl = weatherApiResponse.weather[0].icon
-                    currrentWeatherText.text = weatherApiResponse.main.temp.toString()
+                    val currentTemp = weatherApiResponse.main.temp.toString()
+                    currentWeatherText.text = currentTemp
                     Glide.with(this)
                         .load("https://openweathermap.org/img/wn/$weatherIconUrl@2x.png")
                         .into(currentWeatherIcon)
+                    getSharedPreferences("AppSettings", Context.MODE_PRIVATE).edit().apply {
+                        putString("cityName", cityName)
+                        apply()
+                    }
+                    currentCityNameText.text = pref.getString("cityName", "")
                 }
             } catch (e: Exception) {
                 Handler(Looper.getMainLooper()).post {
