@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/image_rain">
-        <shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="5dp"
+        android:drawable="@drawable/image_rain"
+        android:left="5dp"
+        android:right="5dp"
+        android:top="5dp" />
+    <item>
+        <shape
+            android:padding="5dp"
+            android:shape="rectangle">
             <corners android:radius="15dp" />
+            <stroke
+                android:width="5dp"
+                android:color="@color/white" />
         </shape>
     </item>
-</selector>
+</layer-list>
