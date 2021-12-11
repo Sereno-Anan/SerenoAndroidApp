@@ -22,6 +22,7 @@ class ConfigureActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_configure)
+        setTitle("Setting")
 
         val setCityNameText = findViewById<EditText>(R.id.setCityNameText)
         val setButton = findViewById<Button>(R.id.setCityNameButton)
