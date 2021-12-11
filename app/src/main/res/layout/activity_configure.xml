@@ -4,41 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activities.ConfigureActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/settingsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/movePlayGifButton"
+        <EditText
+            android:id="@+id/setCityNameText"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/play_gif_move" />
+            android:layout_height="match_parent"
+            android:autofillHints="no"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="@string/weather_info_hint_city_name"
+            android:inputType="textPersonName"
+            tools:ignore="TextContrastCheck" />
 
         <Button
-            android:id="@+id/moveFirebaseTestButton"
+            android:id="@+id/setCityNameButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/firebase_test_move" />
+            android:text="@string/configure_save"
+            android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/moveWeatherInfoButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/weather_info_move" />
-
-        <Button
-            android:id="@+id/moveSettingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/configure_move" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

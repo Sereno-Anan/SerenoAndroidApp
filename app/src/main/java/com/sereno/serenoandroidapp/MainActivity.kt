@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.sereno.serenoandroidapp.activities.FirebaseTestActivity
 import com.sereno.serenoandroidapp.activities.PlayGifActivity
+import com.sereno.serenoandroidapp.activities.ConfigureActivity
 import com.sereno.serenoandroidapp.activities.WeatherInfoActivity
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         val movePlayGifButton = findViewById<Button>(R.id.movePlayGifButton)
         val moveFirebaseTestButton = findViewById<Button>(R.id.moveFirebaseTestButton)
         val moveWeatherInfoButton = findViewById<Button>(R.id.moveWeatherInfoButton)
+        val moveSettingButton = findViewById<Button>(R.id.moveSettingButton)
 
         movePlayGifButton.setOnClickListener {
             val intent = Intent(this, PlayGifActivity::class.java)
@@ -29,6 +31,11 @@ class MainActivity : AppCompatActivity() {
 
         moveWeatherInfoButton.setOnClickListener {
             val intent = Intent(this, WeatherInfoActivity::class.java)
+            startActivity(intent)
+        }
+
+        moveSettingButton.setOnClickListener {
+            val intent = Intent(this, ConfigureActivity::class.java)
             startActivity(intent)
         }
     }
