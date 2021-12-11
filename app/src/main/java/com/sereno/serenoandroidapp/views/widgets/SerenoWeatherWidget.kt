@@ -50,7 +50,7 @@ internal fun updateAppWidget(
     // 3分ごとに取得
     Timer().schedule(1000, 180000) {
         if (pref.getString("cityName", "")!!.isNotEmpty()) {
-            views.setTextViewText(R.id.widgetCurrentCityName, pref.getString("cityName", ""))
+            views.setTextViewText(R.id.widgetCurrentCityName, pref.getString("widgetCityName", ""))
         }
         rtdb.child("raindrops/").get().addOnSuccessListener {
             val weatherStatus = it.child("status").value

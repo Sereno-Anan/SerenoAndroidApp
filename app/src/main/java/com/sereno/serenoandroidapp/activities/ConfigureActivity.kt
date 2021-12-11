@@ -51,7 +51,7 @@ class ConfigureActivity : AppCompatActivity() {
                     ?: throw IllegalStateException("body is null")
 
                 getSharedPreferences("AppSettings", Context.MODE_PRIVATE).edit().apply {
-                    putString("cityName", cityName)
+                    putString("widgetCityName", cityName)
                     apply()
                 }
             } catch (e: Exception) {
