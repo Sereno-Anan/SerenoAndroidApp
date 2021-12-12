@@ -67,7 +67,7 @@ class WeatherInfoActivity : AppCompatActivity() {
                 Log.d("city-name", cityName)
 
                 Handler(Looper.getMainLooper()).post {
-                    Log.d("response-weather", weatherApiResponse.weather.toString())
+                    Log.d("response-weather", weatherApiResponse.toString())
                     val weatherIconUrl = weatherApiResponse.weather[0].icon
                     val currentTemp = weatherApiResponse.main.temp.toString()
                     currentWeatherText.text = currentTemp
