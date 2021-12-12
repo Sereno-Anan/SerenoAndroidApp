@@ -7,8 +7,9 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.RemoteViews
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.sereno.serenoandroidapp.BuildConfig
 import com.sereno.serenoandroidapp.R
 import com.sereno.serenoandroidapp.services.OpenWeatherMapService
@@ -55,8 +56,8 @@ internal fun updateAppWidget(
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.widget_sereno_weather)
     val pref = context.getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
-    val rtdb = Firebase.database.reference
-    val formattedDate = SimpleDateFormat("yyy/MM/dd HH:mm", Locale.JAPANESE)
+    val firestore = FirebaseFirestore.getInstance()
+    val formattedDate = SimpleDateFormat("yyy/MM/dd HH:mm", Locale.getDefault())
 
     // 3分ごとに取得
     Timer().schedule(1000, 180000) {
@@ -75,34 +76,39 @@ internal fun updateAppWidget(
 
         val cityName = pref.getString("cityName", "").toString()
 
-        rtdb.child("raindrops/").get().addOnSuccessListener {
-            val weatherStatus = it.child("status").value
-            if (weatherStatus == true) {
-                views.setInt(
-                    R.id.widgetBackground,
-                    "setBackgroundResource",
-                    R.drawable.background_style_rain
-                )
-            } else {
-                views.setInt(
-                    R.id.widgetBackground,
-                    "setBackgroundResource",
-                    R.drawable.background_style_sunny
-                )
+        firestore.collection("raindrops")
+            .orderBy("createdAt", Query.Direction.DESCENDING)
+            .limit(1)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Log.d("firebase", document.data["createdAt"].toString())
+                    val date = document.data["createdAt"] as Timestamp
+                    val weatherStatus = document.data["status"] as Boolean
+
+                    if (weatherStatus) {
+                        views.setInt(
+                            R.id.widgetBackground,
+                            "setBackgroundResource",
+                            R.drawable.background_style_rain
+                        )
+                    } else {
+                        views.setInt(
+                            R.id.widgetBackground,
+                            "setBackgroundResource",
+                            R.drawable.background_style_sunny
+                        )
+                    }
+
+                    views.setTextViewText(
+                        R.id.widgetDeviceUpdateDateText,
+                        formattedDate.format(date.toDate())
+                    )
+                }
             }
-
-            val deviceUpdate = (it.child("timestamp").value as Long)
-
-            views.setTextViewText(
-                R.id.widgetDeviceUpdateDateText,
-                formattedDate.format(deviceUpdate)
-            )
-
-            appWidgetManager.updateAppWidget(appWidgetId, views)
-            Log.d("response-status", it.child("status").value.toString())
-        }.addOnFailureListener {
-            Log.e("firebase", "Error getting data", it)
-        }
+            .addOnFailureListener {
+                Log.e("firebase", "Error getting data", it)
+            }
 
         thread {
             try {
@@ -113,10 +119,11 @@ internal fun updateAppWidget(
                 ).execute().body()
                     ?: throw IllegalStateException("body is null")
 
-                val currentTime = weatherApiResponse.dt.toLong() * 1000
+                val currentTime = (weatherApiResponse.dt.toString() + "000").toLong()
                 val currentTemp = weatherApiResponse.main.temp.toString()
 
                 Log.d("city-name", cityName)
+                Log.d("time", formattedDate.format(currentTime))
 
                 Handler(Looper.getMainLooper()).post {
                     views.setTextViewText(
