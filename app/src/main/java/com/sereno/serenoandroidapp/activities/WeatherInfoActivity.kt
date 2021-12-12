@@ -1,6 +1,11 @@
 package com.sereno.serenoandroidapp.activities
 
 import android.content.Context
+import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,10 +22,18 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import kotlin.concurrent.thread
 
-class WeatherInfoActivity : AppCompatActivity() {
+class WeatherInfoActivity: AppCompatActivity(), SensorEventListener {
+    var lastUpdate: Long = System.currentTimeMillis()
+    val SHAKE_THRESHOLD: Int = 750
+    var last_x = 0f
+    var last_y = 0f
+    var last_z = 0f
+    var sensor: Sensor? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
+
         val getWeatherButton = findViewById<Button>(R.id.getCurrentWeatherButton)
         val pref = getSharedPreferences("AppSettings", Context.MODE_PRIVATE)
 
@@ -31,6 +44,8 @@ class WeatherInfoActivity : AppCompatActivity() {
         getWeatherButton.setOnClickListener {
             getCurrentWeather()
         }
+        val sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
     }
 
     private fun getCurrentWeather() {
@@ -90,4 +105,27 @@ class WeatherInfoActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onSensorChanged(event: SensorEvent) {
+        if (sensor == (SensorManager.SENSOR_ACCELEROMETER as Sensor)) {
+            val curTime: Long = System.currentTimeMillis()
+            if ((curTime - lastUpdate) > 100) {
+                val diffTime: Long = (curTime - lastUpdate)
+                lastUpdate = curTime
+                val x = event.values[SensorManager.DATA_X]
+                val y = event.values[SensorManager.DATA_Y]
+                val z = event.values[SensorManager.DATA_Z]
+                val speed: Float = Math.abs(x+y+z - last_x - last_y - last_z) / diffTime * 10000
+                if (speed > SHAKE_THRESHOLD) {
+                    val intent = Intent(this, FirebaseTestActivity::class.java)
+                    startActivity(intent)
+                }
+                last_x = x
+                last_y = y
+                last_z = z
+            }
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) { }
 }
