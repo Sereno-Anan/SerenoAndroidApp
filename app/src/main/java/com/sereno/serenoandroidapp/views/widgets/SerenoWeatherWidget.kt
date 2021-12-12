@@ -119,7 +119,7 @@ internal fun updateAppWidget(
                 ).execute().body()
                     ?: throw IllegalStateException("body is null")
 
-                val currentTime = (weatherApiResponse.dt.toString() + "000").toLong()
+                val currentTime = weatherApiResponse.dt.toLong() * 1000
                 val currentTemp = weatherApiResponse.main.temp.toString()
 
                 Log.d("city-name", cityName)
