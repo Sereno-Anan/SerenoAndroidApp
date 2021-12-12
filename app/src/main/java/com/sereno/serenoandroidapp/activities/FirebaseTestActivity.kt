@@ -7,10 +7,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.database.ktx.database
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.Query
 import com.sereno.serenoandroidapp.R
 import com.sereno.serenoandroidapp.models.db.firestore.RainDrops
 import java.text.SimpleDateFormat
@@ -25,7 +25,6 @@ class FirebaseTestActivity : AppCompatActivity() {
         val rootLayout: View = findViewById(android.R.id.content)
 
         val firestore = FirebaseFirestore.getInstance()
-        val rtdb = Firebase.database.reference
 
         val addFirebaseDataButton = findViewById<Button>(R.id.addFirebaseDataButton)
         val getFirebaseDataButton = findViewById<Button>(R.id.getFirebaseDataButton)
@@ -47,15 +46,24 @@ class FirebaseTestActivity : AppCompatActivity() {
         }
 
         getFirebaseDataButton.setOnClickListener {
-            rtdb.child("raindrops/").get().addOnSuccessListener {
-                val date = Date(it.child("timestamp").value as Long)
-                val formattedDate = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.JAPANESE)
-                raindropsDateText.text = formattedDate.format(date)
-                raindropsStatusText.text = it.child("status").value.toString()
-            }.addOnFailureListener {
-                Log.e("firebase", "Error getting data", it)
-                Snackbar.make(rootLayout, "Failure getting data", Snackbar.LENGTH_LONG).show()
-            }
+            firestore.collection("raindrops")
+                .orderBy("createdAt", Query.Direction.DESCENDING)
+                .limit(1)
+                .get()
+                .addOnSuccessListener { documents ->
+                    for (document in documents) {
+                        Log.d("firebase", document.data["createdAt"].toString())
+                        val date = document.data["createdAt"] as Timestamp
+                        val formattedDate =
+                            SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+                        raindropsDateText.text = formattedDate.format(date.toDate())
+                        raindropsStatusText.text = document.data["status"].toString()
+                    }
+                }
+                .addOnFailureListener {
+                    Log.e("firebase", "Error getting data", it)
+                    Snackbar.make(rootLayout, "Failure getting data", Snackbar.LENGTH_LONG).show()
+                }
         }
     }
 }
