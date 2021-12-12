@@ -107,7 +107,7 @@ class WeatherInfoActivity: AppCompatActivity(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        if (sensor == (SensorManager.SENSOR_ACCELEROMETER as Sensor)) {
+        if (event.sensor == SensorManager.SENSOR_ACCELEROMETER as Sensor) {
             val curTime: Long = System.currentTimeMillis()
             if ((curTime - lastUpdate) > 100) {
                 val diffTime: Long = (curTime - lastUpdate)
