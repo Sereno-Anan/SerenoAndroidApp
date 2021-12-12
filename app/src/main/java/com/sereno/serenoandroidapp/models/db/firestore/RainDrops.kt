@@ -4,5 +4,5 @@ import com.google.firebase.firestore.FieldValue
 
 data class RainDrops(
     val status: Boolean,
-    val createAt: FieldValue
+    val createdAt: FieldValue
 )
