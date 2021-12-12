@@ -119,16 +119,16 @@ internal fun updateAppWidget(
                 ).execute().body()
                     ?: throw IllegalStateException("body is null")
 
-                val currentTime = weatherApiResponse.dt.toLong() * 1000
+                val updateWeatherDate = weatherApiResponse.dt.toLong() * 1000
                 val currentTemp = weatherApiResponse.main.temp.toString()
 
                 Log.d("city-name", cityName)
-                Log.d("time", formattedDate.format(currentTime))
+                Log.d("time", formattedDate.format(updateWeatherDate))
 
                 Handler(Looper.getMainLooper()).post {
                     views.setTextViewText(
                         R.id.widgetTempUpdateDateText,
-                        formattedDate.format(currentTime)
+                        formattedDate.format(updateWeatherDate)
                     )
                     views.setTextViewText(R.id.widgetTempText, currentTemp)
                     appWidgetManager.updateAppWidget(appWidgetId, views)
