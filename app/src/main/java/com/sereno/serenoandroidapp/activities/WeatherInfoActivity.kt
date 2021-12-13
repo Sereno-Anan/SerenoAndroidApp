@@ -1,6 +1,8 @@
 package com.sereno.serenoandroidapp.activities
 
 import android.content.Context
+import android.content.Intent
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,15 +11,17 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.sereno.serenoandroidapp.BuildConfig
+import com.sereno.serenoandroidapp.MainActivity
 import com.sereno.serenoandroidapp.R
 import com.sereno.serenoandroidapp.services.OpenWeatherMapService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.seismic.ShakeDetector
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import kotlin.concurrent.thread
 
-class WeatherInfoActivity : AppCompatActivity() {
+class WeatherInfoActivity : AppCompatActivity(), ShakeDetector.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_weather_info)
@@ -31,6 +35,10 @@ class WeatherInfoActivity : AppCompatActivity() {
         getWeatherButton.setOnClickListener {
             getCurrentWeather()
         }
+
+        val sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        val sd = ShakeDetector(this)
+        sd.start(sensorManager)
     }
 
     private fun getCurrentWeather() {
@@ -89,5 +97,10 @@ class WeatherInfoActivity : AppCompatActivity() {
                 Log.d("response-error", "debug $e")
             }
         }
+    }
+
+    override fun hearShake() {
+        val intent = Intent(this@WeatherInfoActivity, MainActivity::class.java)
+        startActivity(intent)
     }
 }
