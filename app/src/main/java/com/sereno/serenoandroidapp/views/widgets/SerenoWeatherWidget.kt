@@ -61,10 +61,6 @@ internal fun updateAppWidget(
 
     // 3分ごとに取得
     Timer().schedule(1000, 180000) {
-        if (pref.getString("cityName", "")!!.isNotEmpty()) {
-            views.setTextViewText(R.id.widgetCurrentCityName, pref.getString("cityName", ""))
-        }
-
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
@@ -74,7 +70,39 @@ internal fun updateAppWidget(
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
-        val cityName = pref.getString("cityName", "").toString()
+        if (pref.getString("cityName", "")!!.isNotEmpty()) {
+            views.setTextViewText(R.id.widgetCurrentCityName, pref.getString("cityName", ""))
+
+            val cityName = pref.getString("cityName", "").toString()
+
+            thread {
+                try {
+                    val service: OpenWeatherMapService =
+                        retrofit.create(OpenWeatherMapService::class.java)
+                    val weatherApiResponse = service.getCurrentWeatherData(
+                        cityName, BuildConfig.OWM_API_KEY, "metric", "ja"
+                    ).execute().body()
+                        ?: throw IllegalStateException("body is null")
+
+                    val updateWeatherDate = weatherApiResponse.dt.toLong() * 1000
+                    val currentTemp = weatherApiResponse.main.temp.toString()
+
+                    Log.d("city-name", cityName)
+                    Log.d("time", formattedDate.format(updateWeatherDate))
+
+                    Handler(Looper.getMainLooper()).post {
+                        views.setTextViewText(
+                            R.id.widgetTempUpdateDateText,
+                            formattedDate.format(updateWeatherDate)
+                        )
+                        views.setTextViewText(R.id.widgetTempText, currentTemp)
+                        appWidgetManager.updateAppWidget(appWidgetId, views)
+                    }
+                } catch (e: Exception) {
+                    Log.d("response-error", "debug $e")
+                }
+            }
+        }
 
         firestore.collection("raindrops")
             .orderBy("createdAt", Query.Direction.DESCENDING)
@@ -104,38 +132,11 @@ internal fun updateAppWidget(
                         R.id.widgetDeviceUpdateDateText,
                         formattedDate.format(date.toDate())
                     )
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
                 }
             }
             .addOnFailureListener {
                 Log.e("firebase", "Error getting data", it)
             }
-
-        thread {
-            try {
-                val service: OpenWeatherMapService =
-                    retrofit.create(OpenWeatherMapService::class.java)
-                val weatherApiResponse = service.getCurrentWeatherData(
-                    cityName, BuildConfig.OWM_API_KEY, "metric", "ja"
-                ).execute().body()
-                    ?: throw IllegalStateException("body is null")
-
-                val updateWeatherDate = weatherApiResponse.dt.toLong() * 1000
-                val currentTemp = weatherApiResponse.main.temp.toString()
-
-                Log.d("city-name", cityName)
-                Log.d("time", formattedDate.format(updateWeatherDate))
-
-                Handler(Looper.getMainLooper()).post {
-                    views.setTextViewText(
-                        R.id.widgetTempUpdateDateText,
-                        formattedDate.format(updateWeatherDate)
-                    )
-                    views.setTextViewText(R.id.widgetTempText, currentTemp)
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-                }
-            } catch (e: Exception) {
-                Log.d("response-error", "debug $e")
-            }
-        }
     }
 }
