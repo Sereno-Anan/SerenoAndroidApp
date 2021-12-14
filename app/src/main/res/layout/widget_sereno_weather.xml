@@ -92,7 +92,7 @@
 
                 <TextView
                     android:id="@+id/widgetTempUpdateDateText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/update_date_text"
@@ -118,7 +118,7 @@
 
                 <TextView
                     android:id="@+id/widgetDeviceUpdateDateText"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/update_date_text"
