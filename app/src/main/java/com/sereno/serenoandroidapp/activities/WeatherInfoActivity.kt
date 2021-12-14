@@ -38,7 +38,7 @@ class WeatherInfoActivity : AppCompatActivity(), ShakeDetector.Listener {
 
         val sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         val sd = ShakeDetector(this)
-        sd.start(sensorManager)
+        sd.start(sensorManager, SensorManager.SENSOR_DELAY_GAME)
     }
 
     private fun getCurrentWeather() {

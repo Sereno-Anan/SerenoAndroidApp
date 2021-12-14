@@ -2,5 +2,5 @@ package com.sereno.serenoandroidapp.models.apis.openweathermap.currentweatherdat
 
 data class Coord(
     val lat: Double,
-    val lon: Double
+    val lon: Double,
 )
