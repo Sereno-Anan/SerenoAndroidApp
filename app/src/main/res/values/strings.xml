@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">SerenoAndroidApp</string>
+    <string name="app_name">Pluie</string>
     <string name="add">ADD</string>
     <string name="get">GET</string>
     <string name="celsius_text">℃</string>
     <string name="update_date_text">YYYY/MM/DD hh:mm</string>
-    <string name="play_gif_name">PlayGif</string>
+    <string name="play_gif_name">Play Gif</string>
     <string name="play_gif_move">MOVE TO PLAY GIF</string>
-    <string name="firebase_test_name">FirebaseTest</string>
+    <string name="firebase_test_name">Firebase Test</string>
     <string name="firebase_test_move">MOVE TO FIREBASE TEST</string>
     <string name="firebase_test_status">Status</string>
     <string name="rain_gif_content_description">Gif of rain</string>
-    <string name="weather_info_name">WeatherInfo</string>
+    <string name="weather_info_name">Weather Info</string>
     <string name="weather_info_move">MOVE WEATHER INFO</string>
     <string name="weather_info_hint_city_name">City Name</string>
     <string name="weather_info_image_description">Weather Icon</string>
@@ -21,4 +21,5 @@
     <string name="app_widget_temp_update_text">Temp Update:</string>
     <string name="app_widget_device_update_text">Device Update:</string>
     <string name="app_widget_by_OpenWeatherMap_text">by Open Weather Map</string>
+    <string name="sereno">Sereno</string>
 </resources>

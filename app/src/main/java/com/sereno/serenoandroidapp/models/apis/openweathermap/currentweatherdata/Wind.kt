@@ -2,5 +2,5 @@ package com.sereno.serenoandroidapp.models.apis.openweathermap.currentweatherdat
 
 data class Wind(
     val deg: Int,
-    val speed: Double
+    val speed: Double,
 )

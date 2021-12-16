@@ -30,7 +30,7 @@ class SerenoWeatherWidget : AppWidgetProvider() {
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
-        appWidgetIds: IntArray
+        appWidgetIds: IntArray,
     ) {
 
         // There may be multiple widgets active, so update all of them
@@ -51,7 +51,7 @@ class SerenoWeatherWidget : AppWidgetProvider() {
 internal fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,
-    appWidgetId: Int
+    appWidgetId: Int,
 ) {
     // Construct the RemoteViews object
     val views = RemoteViews(context.packageName, R.layout.widget_sereno_weather)
