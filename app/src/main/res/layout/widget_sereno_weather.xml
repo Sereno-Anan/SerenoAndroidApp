@@ -30,6 +30,7 @@
                 android:id="@+id/widgetCurrentCityName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/sereno"
                 android:textAlignment="textEnd"
                 android:textColor="@android:color/black" />
 
@@ -98,7 +99,8 @@
                     android:text="@string/update_date_text"
                     android:textAlignment="textEnd"
                     android:textColor="@android:color/black"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:typeface="normal" />
             </LinearLayout>
 
             <LinearLayout
@@ -124,7 +126,8 @@
                     android:text="@string/update_date_text"
                     android:textAlignment="textEnd"
                     android:textColor="@android:color/black"
-                    android:textSize="10sp" />
+                    android:textSize="10sp"
+                    android:typeface="normal" />
             </LinearLayout>
 
         </LinearLayout>

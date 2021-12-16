@@ -21,4 +21,5 @@
     <string name="app_widget_temp_update_text">Temp Update:</string>
     <string name="app_widget_device_update_text">Device Update:</string>
     <string name="app_widget_by_OpenWeatherMap_text">by Open Weather Map</string>
+    <string name="sereno">Sereno</string>
 </resources>
